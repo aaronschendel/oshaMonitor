@@ -1,4 +1,4 @@
-# oshaMonitor - Keeps an eye out for the workers
+# OSHA Monitor - Keeps an eye out for the workers
 
 
 ## General Idea
