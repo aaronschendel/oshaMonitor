@@ -1,7 +1,7 @@
 const fs = require('fs');
 const AsyncPolling = require('async-polling');
 const hiveApi = require('hiveosApi');
-const axios = require('axios').default;
+
 
 const bearerToken = authorize();
 
