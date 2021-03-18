@@ -10,10 +10,22 @@ class HiveosApi {
 
     getFarmId(){
         // https://api2.hiveos.farm/api/v2/farms
-        axios.get('https://api2.hiveos.farm/api/v2/farms', auth: Autho) // add bearer token
-        
+        axios.get('https://api2.hiveos.farm/api/v2/farms', {
+            headers: {
+                'Authorization': this.bearerToken
+            }
+            })
+            .then((res) => {
+                console.log(res.data)
+            })
+            .catch((error) => {
+                console.error(error)
+            }
+        )
     }
 
-    getWorkers(farmId)
+    getWorkers(farmId) {
+
+    }
 
 }
