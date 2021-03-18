@@ -18,6 +18,8 @@
   },
   "homepage": "https://github.com/aaronschendel/oshamonitor#readme",
   "dependencies": {
-    "axios": "^0.21.1"
+    "async-polling": "^0.2.1",
+    "axios": "^0.21.1",
+    "request": "^2.88.2"
   }
 }

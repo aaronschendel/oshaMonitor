@@ -1,4 +1,4 @@
-const axios = require('axios').default;
+const req = require('request');
 
 
 class HiveosApi {
@@ -9,23 +9,33 @@ class HiveosApi {
     }
 
     getFarmId(){
-        // https://api2.hiveos.farm/api/v2/farms
-        axios.get('https://api2.hiveos.farm/api/v2/farms', {
-            headers: {
-                'Authorization': this.bearerToken
-            }
-            })
-            .then((res) => {
-                console.log(res.data)
-            })
-            .catch((error) => {
-                console.error(error)
-            }
-        )
+        const options = {
+            url: 'https://api2.hiveos.farm/api/v2/farms',
+            method: 'GET',
+            headers: { 'Authorization': `Bearer ${this.bearerToken}` }
+        };
+        
+        req(options, function(err, res, body) {
+            let json = JSON.parse(body);
+            const myVar = json.data[0].id;
+            console.log(myVar);
+        });
     }
 
-    getWorkers(farmId) {
-
+    isOnline() {
+        const options = {
+            url: `https://api2.hiveos.farm/api/v2/farms/481439/workers`,
+            method: 'GET',
+            headers: { 'Authorization': `Bearer ${this.bearerToken}` }
+        };
+        req(options, function(err, res, body) {
+            let json = JSON.parse(body);
+            const myVar = json.data[0].stats.online;
+            console.log(myVar);
+            return myVar;
+        });
     }
 
 }
+
+module.exports = { HiveosApi };

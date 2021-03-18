@@ -1,18 +1,21 @@
 const fs = require('fs');
 const AsyncPolling = require('async-polling');
-const hiveApi = require('hiveosApi');
+const hapi = require('./hiveosApi');
 
 
 const bearerToken = authorize();
 
-beginPolling(bearerToken);
+const hiveOsApi = new hapi.HiveosApi(bearerToken);
 
 
+//beginPolling(bearerToken);
 
+
+hiveOsApi.isOnline();
 
 function authorize() {
     var configJson = JSON.parse(fs.readFileSync('hiveos_config.json', 'utf8'));
-    const bearerToken = configJson.bearer_token;
+    const bearerToken = configJson.credentials.bearer_token;
 
     return bearerToken
 }
