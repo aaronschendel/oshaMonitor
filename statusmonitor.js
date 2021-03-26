@@ -23,12 +23,21 @@ function authorize() {
 
 async function beginPolling(bearerToken) {
     try {
-        await hiveOsApi.isOnline();
+        AsyncPolling(function(end) { // change what I'm using for my own thing and then await on isOnline
+            let online = hiveOsApi.isOnline().then(function() {
+                if (online === 'true') {
+                    console.log('Nice!');
+                }
+                else {
+                    console.log(online);
+                }
+            });
+            
+            end();
+        }, 1000).run();
     }
     catch(e) {
         console.log(e);
     }
-    // AsyncPolling(function(end) {
-        
-    // });
+    
 }
