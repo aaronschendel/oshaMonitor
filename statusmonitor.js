@@ -4,7 +4,7 @@ const twilio = require('twilio');
 const hapi = require('./hiveosApi');
 
 var configJson = JSON.parse(fs.readFileSync('oshamonitor_config.json', 'utf8'));
-const bearerToken = configJson.credentials.bearer_token;
+const bearerToken = configJson.hiveos.bearer_token;
 const alertRecipient = configJson.twilio.alert_recipient;
 const twilioNumber = configJson.twilio.twilio_number;
 const twilioAccountSid = configJson.twilio.account_sid; 
@@ -22,11 +22,11 @@ async function beginPolling() {
         var myInterval = setInterval(async function() {
             let online = await hiveOsApi.isOnline();
 
-            if (online === false) {
+            if (online === true) {
                 console.log('Your worker is online and doing their job!');
             }
             else {
-                console.log(online);
+                console.log("Worker Status Alert! Online = " + online);
                 sendText('Mining rig is offline! Fix this!', alertRecipient, twilioNumber)
                 
                 clearInterval(myInterval); // End polling if offline to avoid sending many texts

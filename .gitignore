@@ -104,4 +104,4 @@ dist
 .tern-port
 
 # Sensitive config file
-hiveos_config.json
+oshamonitor_config.json
