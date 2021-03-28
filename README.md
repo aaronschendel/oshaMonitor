@@ -20,6 +20,8 @@ Place this file at the root directory
     - This is your Auth Token for Twilio. Can be found on the Twilio homepage after logging in. [More Details](https://support.twilio.com/hc/en-us/articles/223136027-Auth-Tokens-and-How-to-Change-Them)
 - general.refresh_interval
     - This sets the frequency of the polling to check worker status. The number is the delay in milliseconds. IE: 5 seconds is 5000.
+- general.end_monitoring_after_alert
+    - This flag determines whether or not oshamonitor will continue running after alerting you that your system is offline. Main reason for setting this to true would be if you were concerned about not resolving the issue and the text messages costing you too much money. However, with a 60 second refresh interval an entire day of text messages would  cost you around $10 - not terrible.
 ```
     "hiveos": {
         "bearer_token": "your_hiveos_bearer_token"
@@ -31,9 +33,11 @@ Place this file at the root directory
         "auth_token": "your_auth_token"
     },
     "general" {
-        "refresh_interval": "5000"
+        "refresh_interval": "5000",
+        "end_monitoring_after_alert": "false"
     }
 ```
 
 # Important Notes
+- Run `npm install` at the root level of this project to install the dependencies before first run.
 - This currently is only set up to work for the first worker in your HiveOS account. It will ONLY monitor this one worker currently. I only have one worker so I have not implemented more workers at this point and likely will not.

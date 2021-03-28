@@ -10,6 +10,7 @@ const twilioNumber = configJson.twilio.twilio_number;
 const twilioAccountSid = configJson.twilio.account_sid; 
 const twilioAuthToken = configJson.twilio.auth_token;
 const refreshInterval = configJson.general.refresh_interval;
+const endMonitoringAfterAlert = configJson.general.end_monitoring_after_alert;
 
 const hiveOsApi = new hapi.HiveosApi(bearerToken);
 const twilioClient = new twilio(twilioAccountSid, twilioAuthToken);
@@ -30,7 +31,9 @@ async function beginPolling() {
                 console.log("Worker Status Alert! Online = " + online);
                 sendText('Mining rig is offline! Fix this!', alertRecipient, twilioNumber)
                 
-                clearInterval(myInterval); // End polling if offline to avoid sending many texts
+                if (endMonitoringAfterAlert === 'true') {
+                    clearInterval(myInterval); // End polling if offline to avoid sending many texts
+                }
             }
         }, refreshInterval);
     }
