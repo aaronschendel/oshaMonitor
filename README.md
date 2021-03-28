@@ -18,6 +18,8 @@ Place this file at the root directory
     - This is your String Identifier (SID) for Twilio. Can be found on Twilio homepage after logging in. [More Details](https://www.twilio.com/docs/glossary/what-is-a-sid)
 - twilio.auth_token
     - This is your Auth Token for Twilio. Can be found on the Twilio homepage after logging in. [More Details](https://support.twilio.com/hc/en-us/articles/223136027-Auth-Tokens-and-How-to-Change-Them)
+- general.refresh_interval
+    - This sets the frequency of the polling to check worker status. The number is the delay in milliseconds. IE: 5 seconds is 5000.
 ```
     "hiveos": {
         "bearer_token": "your_hiveos_bearer_token"
@@ -27,5 +29,11 @@ Place this file at the root directory
         "twilio_number": "+1[your_twilio_number]",
         "account_sid": "your_account_sid",
         "auth_token": "your_auth_token"
+    },
+    "general" {
+        "refresh_interval": "5000"
     }
 ```
+
+# Important Notes
+- This currently is only set up to work for the first worker in your HiveOS account. It will ONLY monitor this one worker currently. I only have one worker so I have not implemented more workers at this point and likely will not.

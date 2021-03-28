@@ -9,6 +9,7 @@ const alertRecipient = configJson.twilio.alert_recipient;
 const twilioNumber = configJson.twilio.twilio_number;
 const twilioAccountSid = configJson.twilio.account_sid; 
 const twilioAuthToken = configJson.twilio.auth_token;
+const refreshInterval = configJson.general.refresh_interval;
 
 const hiveOsApi = new hapi.HiveosApi(bearerToken);
 const twilioClient = new twilio(twilioAccountSid, twilioAuthToken);
@@ -31,7 +32,7 @@ async function beginPolling() {
                 
                 clearInterval(myInterval); // End polling if offline to avoid sending many texts
             }
-        }, 5000);
+        }, refreshInterval);
     }
     catch(e) {
         console.log(e);
